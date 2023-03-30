@@ -7,6 +7,6 @@ import com.masai.exception.NoRecordFound;
 import com.masai.exception.SomewentWrong;
 
 public interface FacultyDao {
-	public void Login(String username, String password) throws SomewentWrong, NoRecordFound;
-	public List<FacultyDTO> searchByModleNo(int batchId) throws SomewentWrong, NoRecordFound;
+	public FacultyDTO loginFaculty(String username, String password) throws SomewentWrong;
+	
 }

@@ -8,10 +8,34 @@ public class FacutlyDTOImpl implements FacultyDTO {
 	private String password;
 	private String mobile;
 	private String address;
+	
+	public FacutlyDTOImpl() {
+		super();
+	}
 	public FacutlyDTOImpl(int facultyId, String fname, String lname, String username, String password, String mobile,
 			String address) {
 
 		this.facultyId = facultyId;
+		this.fname = fname;
+		this.lname = lname;
+		this.username = username;
+		this.password = password;
+		this.mobile = mobile;
+		this.address = address;
+	}
+	public FacutlyDTOImpl(int facultyId, String fname, String lname, String username, String mobile,
+			String address) {
+
+		this.facultyId = facultyId;
+		this.fname = fname;
+		this.lname = lname;
+		this.username = username;
+		this.mobile = mobile;
+		this.address = address;
+	}
+	public FacutlyDTOImpl( String fname, String lname, String username, String password, String mobile,
+			String address) {
+
 		this.fname = fname;
 		this.lname = lname;
 		this.username = username;

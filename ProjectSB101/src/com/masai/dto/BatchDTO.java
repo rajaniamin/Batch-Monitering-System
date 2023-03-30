@@ -1,18 +1,20 @@
 package com.masai.dto;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public interface BatchDTO {
-	public String getBatchId();
-	public void setBatchId(String batchId);
-	public String getCourseName() ;
-	public void setCourseName(String courseName) ;
+	public int getBatchId();
+	public void setBatchId(int batchId);
+	public int getCourseId();
+	public void setCourseId(int courseId);
 	public int getFacultyId() ;
-	public void setFacultyId(int facultyId) ;
+	public void setFacultyId(int facultyId);
 	public int getNoOfStudents();
-	public void setNoOfStudents(int noOfStudents) ;
-	public LocalDate getBatchstartDate() ;
-	public void setBatchstartDate(LocalDate batchstartDate);
+	public void setNoOfStudents(int noOfStudents);
+	public Date getStartDate();
+	
 	public int getDuration() ;
-	public void setDuration(int duration);
+	public void setDuration(int duration) ;
+	void setStartDate(Date startDate);
 }

@@ -8,36 +8,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.masai.dto.FacultyDTO;
+import com.masai.dto.FacutlyDTOImpl;
 import com.masai.exception.NoRecordFound;
 import com.masai.exception.SomewentWrong;
 
 public class FacultyDAOImpl implements FacultyDao{
-	@Override 
-	public void Login(String username, String password) throws SomewentWrong, NoRecordFound{
-		Connection conn = null;
+	@Override
+	public FacultyDTO loginFaculty(String username, String password) throws SomewentWrong {
 		
-		try {
+		Connection conn=null;
+		FacultyDTO faculty = null;
+		
+		try{
 			conn=DbUtils.getConn();
-			String LOGIN_QUERY = "SELECT username FROM user WHERE username = ? AND password = ?";
-			PreparedStatement ps = conn.prepareStatement(LOGIN_QUERY);
-			
+			PreparedStatement ps= conn.prepareStatement("select * from faculty where username = ?");			
 			
 			ps.setString(1, username);
-			ps.setString(2, password);
 			
+			ResultSet rs= ps.executeQuery();
 			
-			ResultSet resultSet = ps.executeQuery();
-			if(DbUtils.isResultSetEmpty(resultSet)) {
-				throw new NoRecordFound("Invalid Username and Password");
-			}
+			if(rs.next()) {		
+				
+				PreparedStatement ps2 = conn.prepareStatement("select * from faculty where username = ? and password = ?");
+				
+				ps2.setString(1, username);
+				ps2.setString(2, password);
+				
+				ResultSet  rs2 = ps2.executeQuery();
+				
+				if(rs2.next()) {
+					int fid = rs.getInt("facultyId");
+					String fname = rs.getString("firstname");
+					String lname = rs.getString("lastname");
+					String uname = rs.getString("username");
+					String mobile = rs.getString("mobile");
+					String address = rs.getString("address");
+					
+					faculty = new FacutlyDTOImpl(fid,fname,lname,uname,mobile,address);
+				}else
+					
+					throw new SomewentWrong("OOPs!! Incorrect Password");
+				
+			}else
 			
-			resultSet.next();
-			LoggedINUser.loggedInUserId = resultSet.getInt("username");
-			
+				throw new SomewentWrong("No Such Faculty Present With this Username");
 			
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO: handle exception
+			
+			throw new SomewentWrong(e.getMessage());
 		}finally {
 			try {
 				DbUtils.closeConn(conn);
@@ -47,38 +66,10 @@ public class FacultyDAOImpl implements FacultyDao{
 			}
 		}
 		
+		return faculty;
+		
 	}
-	@Override
-	public List<FacultyDTO> searchByModleNo(int batchId) throws SomewentWrong, NoRecordFound{
-		
-		Connection conn=null;
-		List <FacultyDTO> list=new ArrayList<>();
-		
-		try {
-			conn=DbUtils.getConn();
-			PreparedStatement ps = conn .prepareStatement("select batchid, courseName, startDate, duration from faculty f inner join batch b on f.facultyId=b.facultyId where f.facultyId=?");		
-			
-	          ps.setInt(1,batchId);	
-		      
-	          ResultSet rs= ps.executeQuery();
-	          
-	          if(DbUtils.isResultSetEmpty(rs)) {
-	        	   throw new NoRecordFound("Not record Found");
-	           }
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				DbUtils.closeConn(conn);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 
-		}
-		
-		return list;
-		
-	}
+	
+
 }
