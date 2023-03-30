@@ -1,0 +1,19 @@
+ create table Faculty(
+    -> facultyId int primary key auto_increment,
+    -> firstName varchar(20),
+    -> lastName varchar(20),
+    -> username varchar(20),
+    -> password varchar(20),
+    -> mobile varchar(10),
+    -> facultyAddress varchar(40));
+    
+    
+    
+    create table Faculty(
+    -> facultyId int primary key auto_increment,
+    -> firstName varchar(20),
+    -> lastName varchar(20),
+    -> username varchar(20),
+    -> password varchar(20),
+    -> mobile varchar(10),
+    -> facultyAddress varchar(40)); 
