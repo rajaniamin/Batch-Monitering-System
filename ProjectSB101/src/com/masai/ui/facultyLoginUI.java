@@ -12,7 +12,7 @@ import com.masai.exception.SomewentWrong;
 public class facultyLoginUI {
 	
 	
-	public static void loginOp(FacultyDTO factulty) throws SomewentWrong {
+	public static void loginOp(FacultyDTO factulty) throws SomewentWrong, NoRecordFound {
 		Scanner sc = new Scanner(System.in);
 		int choice=0;
 		do {
@@ -24,6 +24,9 @@ public class facultyLoginUI {
 			switch(choice) {
 			case 1:
 				ViewFacultyUI.viewByFaculty(factulty.getFacultyId());
+				break;
+			case 2:
+				ViewFacultyUI.addCoursePlanMtd();
 				break;
 			case 0:
 				System.out.println("Exiting...");
@@ -38,7 +41,7 @@ public class facultyLoginUI {
 	
 	
 	
-	public static void login() {
+	public static void login() throws NoRecordFound {
 		FacultyDTO faculty = null;
 		
 		

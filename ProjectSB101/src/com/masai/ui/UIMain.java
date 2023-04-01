@@ -15,12 +15,11 @@ public class UIMain {
 		System.out.println("2. Check Faculty");
 		System.out.println("3. Check Batch");
 		System.out.println("4. Check Course Plan");
-		System.out.println("5. Check Day wise Planner");
-		System.out.println("6. Log Out");
+		System.out.println("5. Log Out");
 		System.out.println("0. Exit");
 	}
 	
-	public static void adminMenu(Scanner sc) {
+	public static void adminMenu(Scanner sc) throws NoRecordFound {
 		int choice =0;
 		
 		do {
@@ -32,16 +31,16 @@ public class UIMain {
 				CheckCourseUI.checkCourse();
 				break;
 			case 2:
-				//facultyLoginUI.
+				facultyLoginUI.login();
 				break;
 			case 3:BatchUI.batchOp();
 				
 				break;
 			case 4:
+				CheckCourseUI.viewList();
 				break;
 			case 5:
-				break;
-			case 6:
+				System.out.println("Logging Off...");
 				break;
 			case 0:
 				break;
@@ -52,7 +51,7 @@ public class UIMain {
 		}while(choice != 0);
 	}
 	
-	public static void adminLogin(Scanner sc) {
+	public static void adminLogin(Scanner sc) throws NoRecordFound {
 		System.out.print("Please enter your username");
 		String username = sc.next();
 		System.out.print("Please enter your password");
@@ -66,7 +65,7 @@ public class UIMain {
 		}
 	}
 	
-public static void main(String[] args) {
+public static void main(String[] args) throws NoRecordFound {
 	Scanner sc=new Scanner(System.in);
 	
 	int choice=0;

@@ -16,7 +16,7 @@ public class CheckCourseUI {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Enter Name of the Course");
 			String cname = sc.next();
-			System.out.println("Enter the Course Fee");
+			System.out.println("Enter the Course Fee (in Lakhs)");
 			int cfee = sc.nextInt();
 			
 			CourseDTO cdto=new CourseDTOImpl(cname,cfee);
@@ -39,7 +39,7 @@ public class CheckCourseUI {
 		int cid = sc.nextInt();
 		System.out.println("Enter Name of the Course");
 		String cname = sc.next();
-		System.out.println("Enter the Course Fee");
+		System.out.println("Enter the Course Fee(in Lakhs)");
 		int cfee = sc.nextInt();
 		
 		CourseDTO cdto=new CourseDTOImpl(cid,cname,cfee);

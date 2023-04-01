@@ -47,11 +47,11 @@ public class BatchDaoImpl implements BatchDao {
 			count++;
             String text = String.format("%03d", count);
 			
-			String batchId = cName + text;
+			int batchId = count;
 			
-			PreparedStatement ps2 = conn .prepareStatement("insert into Batch(batchId, courseId, noOfStudents, batchstartDate, duration) values(?,?,?,?,?)");
+			PreparedStatement ps2 = conn .prepareStatement("insert into Batch(batchId, courseId, numberofStudents, startDate, duration) values(?,?,?,?,?)");
 			
-			ps2.setString(1, batchId);
+			ps2.setInt(1, batchId);
 			ps2.setInt(2, batch.getCourseId());
 			ps2.setInt(3,batch.getNoOfStudents());
 			ps2.setDate(4, batch.getStartDate());
@@ -68,6 +68,7 @@ public class BatchDaoImpl implements BatchDao {
 			}
 		} catch (ClassNotFoundException |SQLException e) {
 			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}finally {
 			try {
 				DbUtils.closeConn(conn);
@@ -80,16 +81,15 @@ public class BatchDaoImpl implements BatchDao {
 		
 	}
 	@Override
-	public String updateBatch(String str, String set, String name) throws SomewentWrong {
+	public String updateBatch(String str, String set, int name) throws SomewentWrong {
 		Connection conn=null;
-		String message = "Batch Data Not Updated";
-		
+		String message ="Batch Data Not Updated";
 		try{
-			conn=DbUtils.getConn();
+			conn=DbUtils. getConn();
 			PreparedStatement ps = conn.prepareStatement("update batch set "+ str +" = ? where batchId = ?");
 			
 			ps.setString(1, set);
-			ps.setString(2, name);
+			ps.setInt(2, name);
 			
 			int x = ps.executeUpdate();
 			
@@ -101,7 +101,7 @@ public class BatchDaoImpl implements BatchDao {
 			
 		} catch (ClassNotFoundException | SQLException e) {
 
-			throw new SomewentWrong("Wrong Data Format");
+			throw new SomewentWrong("Invalid Input :(");
 		}finally {
 			try {
 				DbUtils.closeConn(conn);
@@ -116,13 +116,13 @@ public class BatchDaoImpl implements BatchDao {
 	
 
 @Override
-	public BatchDTO searchBatchById(String id) throws SomewentWrong{
+	public BatchDTO searchBatchById(int id) throws SomewentWrong{
 		Connection conn=null;
 		BatchDTO batch=null;
 		try {
 			conn=DbUtils.getConn();
-			PreparedStatement ps = conn.prepareStatement("Select b.batchId, b.courseId, b.facultyId, f.facultyFname, b.noOfStudents, b.batchstartDate, b.duration from Batch b, Faculty f where b.facultyID = f.facultyID and b.batchId = ?");
-              ps.setString(1, id);
+			PreparedStatement ps = conn.prepareStatement(" Select b.batchId, b.courseId, b.facultyId, b.numberofStudents, b.startDate, b.duration from Batch b, Faculty f where b.facultyID = f.facultyID and b.batchId = ?");
+              ps.setInt(1, id);
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -130,8 +130,8 @@ public class BatchDaoImpl implements BatchDao {
 				int bid = rs.getInt("batchId");
 				int cid = rs.getInt("courseId");
 				int fid = rs.getInt("facultyId");
-				int nos = rs.getInt("noOfStudents");
-				Date date = rs.getDate("batchstartDate");
+				int nos = rs.getInt("numberofStudents");
+				Date date = rs.getDate("startDate");
 				int dur = rs.getInt("duration");
 				
 				String sDate = date.toString();
@@ -142,6 +142,7 @@ public class BatchDaoImpl implements BatchDao {
 				throw new SomewentWrong("Batch does not exist with this id "+ id + ".");
 			
 		} catch (ClassNotFoundException | SQLException e) {
+			System.out.println(e.getMessage());
 			// TODO: handle exception
 		}finally {
 			try {
@@ -155,7 +156,7 @@ public class BatchDaoImpl implements BatchDao {
 		return batch;
 	}
 @Override
-public String deleteBatch(String batchId) throws SomewentWrong {
+public String deleteBatch(int batchId) throws SomewentWrong {
 	Connection conn=null;
 	String message = "Batch Data Not Updated";
 	
@@ -163,7 +164,7 @@ public String deleteBatch(String batchId) throws SomewentWrong {
 		conn= DbUtils.getConn();
 		PreparedStatement ps = conn.prepareStatement("delete from batch where batchId = ?");
 		
-		ps.setString(1, batchId);
+		ps.setInt(1, batchId);
 		
 		int x = ps.executeUpdate();
 		
@@ -175,7 +176,7 @@ public String deleteBatch(String batchId) throws SomewentWrong {
 		
 	} catch (ClassNotFoundException | SQLException e) {
 
-		throw new SomewentWrong("Wrong Data Format");
+		throw new SomewentWrong(e.getMessage());
 	}finally {
 		try {
 			DbUtils.closeConn(conn);
