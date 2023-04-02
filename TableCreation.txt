@@ -1,0 +1,35 @@
+create table Faculty(
+facultyId int primary key auto_increment,
+firstname varchar(20),
+lastname varchar(20),
+username varchar(20),
+password varchar(20),
+mobile varchar(10),
+address varchar(40)
+);
+    
+create table coursedetails(
+courseId int primary key auto_increment,
+courseName varchar(25),
+coursefee int
+);
+
+create table Batch(
+batchid int primary key auto_increment,
+courseId int,
+facultyId int,
+numberofStudents int,
+startDate date,
+duration int,
+foreign key (courseId) references coursedetails (courseId),
+foreign key (facultyId) references faculty (facultyId)
+);
+
+create table coursetopic(
+planid int primary key auto_increment,
+batchId int,
+totaldays int,
+topic varchar(20),
+is_Active tinyint(1) default 0,
+foreign key (batchId) references Batch (batchid)
+);
