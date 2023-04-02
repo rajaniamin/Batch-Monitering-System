@@ -12,13 +12,13 @@ import com.masai.exception.SomewentWrong;
 
 public class CheckCourseUI {
 	public static void addCourseUI() {
-	
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Enter Name of the Course");
 			String cname = sc.next();
 			System.out.println("Enter the Course Fee (in Lakhs)");
 			int cfee = sc.nextInt();
-			
+			System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 			CourseDTO cdto=new CourseDTOImpl(cname,cfee);
 			
 			CourseDAO cdao=new CourseDAOImpl();
@@ -35,13 +35,14 @@ public class CheckCourseUI {
 	 }
 	public static void updateUI() {
 		Scanner sc = new Scanner(System.in);
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 		System.out.println("Enter Name of the Courseid");
 		int cid = sc.nextInt();
 		System.out.println("Enter Name of the Course");
 		String cname = sc.next();
 		System.out.println("Enter the Course Fee(in Lakhs)");
 		int cfee = sc.nextInt();
-		
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 		CourseDTO cdto=new CourseDTOImpl(cid,cname,cfee);
 		CourseDAO cdao=new CourseDAOImpl();
 		String res;
@@ -59,8 +60,10 @@ public class CheckCourseUI {
 	
 	public static void searchCourse() {
 		Scanner sc = new Scanner(System.in);
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 		System.out.println("Enter Name of the Course");
 		String cname = sc.next();
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 		CourseDAO cdao=new CourseDAOImpl();
 		try {
 			List<CourseDTO> listC= cdao.searchCourse(cname);
@@ -82,10 +85,11 @@ public class CheckCourseUI {
 	}
 	public static void deleteUI() {
 		Scanner sc = new Scanner(System.in);
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 		System.out.println("Enter Name of the Course");
 		String cname = sc.next();
 		CourseDAO cdao=new CourseDAOImpl();
-		
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 		try {
 			cdao.deleteBatch(cname);
 			System.out.println("Batch Deleted Sucesfully ");
@@ -101,6 +105,7 @@ public class CheckCourseUI {
 		Scanner sc=new Scanner(System.in);
 		int choice =0;
 		do {
+			System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 			System.out.println("1. Add Course");
 			System.out.println("2. Update Course");
 			System.out.println("3. Search Course");
@@ -109,7 +114,7 @@ public class CheckCourseUI {
 			System.out.println("0. Exit");
 			
 			choice=sc.nextInt();
-			
+			System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 			switch(choice) {
 			case 1:
 				addCourseUI();

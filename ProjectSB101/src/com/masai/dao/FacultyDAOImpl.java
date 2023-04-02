@@ -69,7 +69,59 @@ public class FacultyDAOImpl implements FacultyDao{
 		return faculty;
 		
 	}
-
+@Override
+	public String forgetPassword(String mobile, String pass) throws SomewentWrong{
+		Connection conn=null;
+		String message ="Sorry, Something went wrong, Not Able To Change Password";
+	    try {
+			conn=DbUtils.getConn();
+			PreparedStatement ps = conn.prepareStatement("update faculty set password = ? where mobile = ?");
+			ps.setString(1, pass);
+			ps.setString(2, mobile);
+			
+			int query = ps.executeUpdate();
+			
+			if(query >0) {
+				message ="Your Password Updated Successfully";	
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			message = e.getMessage();
+		}finally {
+			try {
+				DbUtils.closeConn(conn);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	    return message;
+	}
 	
-
+@Override
+public String changePassword(int faculty, String pass) throws SomewentWrong {
+	
+	String message = "Password Not Updated";
+	Connection conn=null;
+	try{
+		conn=DbUtils.getConn();
+		PreparedStatement ps = conn.prepareStatement("update faculty set password = ? where facultyId = ? ");
+		
+		ps.setString(1, pass);
+		ps.setInt(2, faculty);
+		
+		int x = ps.executeUpdate();
+		
+		if(x>0) {		
+			message = "Your Password Updated Successfully";	
+		}
+		
+	}catch(ClassNotFoundException | SQLException e) {
+		
+		message = e.getMessage();
+		
+	}
+	
+	return message;
+	
+}
 }

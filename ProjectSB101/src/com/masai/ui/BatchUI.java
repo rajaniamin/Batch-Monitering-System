@@ -19,6 +19,7 @@ public class BatchUI {
 	public static void addBatchUI() {
 		Scanner sc = new Scanner(System.in);
 		
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 		System.out.println("Enter Course ID of the Batch");
 		int cId = sc.nextInt();
 		System.out.println("Enter Students number of the Batch");
@@ -27,7 +28,7 @@ public class BatchUI {
 		Date date = Date.valueOf(sc.next());
 		System.out.println("Enter Batch Duration");
 		int dur = sc.nextInt();
-		
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 		BatchDTO bdto=new BatchDTOImpl(cId,totStu,date,dur);
 		BatchDao bdao= new BatchDaoImpl();	
 		
@@ -51,12 +52,13 @@ public class BatchUI {
 			
 			do {
 				flag2 = true;
+				System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 				System.out.println("What do you want to update?");
 				System.out.println("1. Number of Students");
 				System.out.println("2. Start Date");
 				System.out.println("3. Batch Duration in Months");
 				System.out.println("0. Exit" );
-				
+				System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 				choice=sc.nextInt();
 				switch(choice) {
 				case 1:
@@ -80,7 +82,7 @@ public class BatchUI {
 					sc.nextLine();
 					System.out.println("Enter New Entry :");
 					String set = sc.nextLine();
-					
+					System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 					BatchDao dao = new BatchDaoImpl();
 					
 					String result;
@@ -193,7 +195,7 @@ public class BatchUI {
 		int choice=0;
 		
 		do {
-			
+			System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 			System.out.println("1. Add Batch");
 			System.out.println("2. Update Batch");
 			System.out.println("3. Search Batch");
@@ -205,7 +207,7 @@ public class BatchUI {
 			System.out.println("Enter your selection here");
 
 			choice=sc.nextInt();
-			
+			System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 			switch(choice) {
 			case 1:
 				addBatchUI();

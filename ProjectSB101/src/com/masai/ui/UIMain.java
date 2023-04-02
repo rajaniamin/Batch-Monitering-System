@@ -11,12 +11,15 @@ import com.masai.exception.SomewentWrong;
 public class UIMain {
 	
 	public static void displayAdminMenu() {
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 		System.out.println("1. Check Courses");
 		System.out.println("2. Check Faculty");
 		System.out.println("3. Check Batch");
 		System.out.println("4. Check Course Plan");
 		System.out.println("5. Log Out");
 		System.out.println("0. Exit");
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+
 	}
 	
 	public static void adminMenu(Scanner sc) throws NoRecordFound {
@@ -52,10 +55,14 @@ public class UIMain {
 	}
 	
 	public static void adminLogin(Scanner sc) throws NoRecordFound {
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+
 		System.out.print("Please enter your username");
 		String username = sc.next();
 		System.out.print("Please enter your password");
 		String password = sc.next();
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+
 		
 		if(username.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")) {
 			adminMenu(sc);
@@ -71,12 +78,16 @@ public static void main(String[] args) throws NoRecordFound {
 	int choice=0;
 	
 	do {
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+
 		System.out.println("Press 1 to Login Admin Account");
 		System.out.println("Press 2 to Login Faculty Account");
 		System.out.println("Press 0 to Exit");
 		System.out.println("Please enter your selection here");
 		
+		
 		choice=sc.nextInt();
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 		switch(choice) {
 		case 1:
 			adminLogin(sc);
