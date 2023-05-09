@@ -22,6 +22,11 @@ Features of Faculty Account
 - Checking the Assigned work
 - Addig Topics
 
+Tech Stack Used:
+- Java
+- MySql
+- JDBC
+
 ER Diagram
 
 ![ERDiagram](https://user-images.githubusercontent.com/112753940/229480831-23bfb302-92a3-4ed9-b42c-339cd6f69155.png)
